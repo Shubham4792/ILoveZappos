@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/transact"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Transaction History" />
+        <item
+            android:id="@+id/order_book"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Order Book" />
+        <item
+            android:id="@+id/input_price"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Input Price" />
+        <item
+            android:id="@+id/git_repo"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Github Repo" />
+    </group>
+
+</menu>
