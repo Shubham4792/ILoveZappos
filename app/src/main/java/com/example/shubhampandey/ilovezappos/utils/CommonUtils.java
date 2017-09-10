@@ -15,7 +15,6 @@ import java.net.URL;
 /**
  * Created by SHUBHAM PANDEY on 9/10/2017.
  */
-
 public class CommonUtils {
     /**
      * Returns boolean stating if network is available
@@ -32,10 +31,11 @@ public class CommonUtils {
 
     /**
      * Hit the api with the URL as the argument and retrieve response as JSONObject
+     *
      * @param apiURL URL for the API
      * @return JSONObject response
      */
-    public static JSONObject getJSON(String apiURL){
+    public static JSONObject getJSON(String apiURL) {
         try {
             URL url = new URL(apiURL);
             HttpURLConnection connection =
@@ -55,11 +55,12 @@ public class CommonUtils {
     }
 
     /**
-     * Hit the api with the URL as the argument and retrieve response as JSONObject
+     * Hit the api with the URL as the argument and retrieve response as JSONArray
+     *
      * @param apiURL URL for the API
-     * @return JSONObject response
+     * @return JSONArray response
      */
-    public static JSONArray getJSON(String apiURL, String dummy){
+    public static JSONArray getJSON(String apiURL, String dummy) {
         try {
             URL url = new URL(apiURL);
             HttpURLConnection connection =

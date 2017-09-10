@@ -1,38 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:focusable="true"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
-    android:clickable="true"
-    android:background="?android:attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:layout_height="@dimen/table_row_height"
+    android:layout_marginEnd="@dimen/def_margin"
+    android:layout_marginLeft="@dimen/def_margin"
+    android:layout_marginRight="@dimen/def_margin"
+    android:layout_marginStart="@dimen/def_margin"
+    android:orientation="horizontal"
+    android:padding="6dp">
 
     <TextView
-        android:id="@+id/title"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        android:text="BID"
-        android:layout_alignParentTop="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:id="@+id/bidask"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/cell_shape"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="@dimen/table_row_text_size"
+        tools:text="Bid" />
 
     <TextView
-        android:id="@+id/genre"
-        android:layout_below="@id/title"
-        android:text="dnfjsdf"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:id="@+id/amount"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/cell_shape"
+        android:gravity="center"
+        android:textSize="@dimen/table_row_text_size"
+        tools:text="Amount" />
 
     <TextView
-        android:id="@+id/year"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_height="wrap_content" />
+        android:id="@+id/value"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/cell_shape"
+        android:gravity="center"
+        android:textSize="@dimen/table_row_text_size"
+        tools:text="Value" />
 
-</RelativeLayout>
+</LinearLayout>

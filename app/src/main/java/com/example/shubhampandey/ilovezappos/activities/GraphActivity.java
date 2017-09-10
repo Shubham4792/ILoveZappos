@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.example.shubhampandey.ilovezappos.utils.CommonUtils.isNetworkAvailable;
 
-public class MainActivity extends BasicActivity {
+public class GraphActivity extends BaseActivity {
     private LineChart mChart;
     private long mReferenceTime;
     private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -74,23 +74,23 @@ public class MainActivity extends BasicActivity {
         if (isNetworkAvailable(getApplicationContext())) {
             new BTCTrendTask().execute();
         } else {
-            Toast.makeText(getApplicationContext(), "No internet connectivity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
             mSwipeRefreshLayout.setRefreshing(false);
         }
     }
 
 
     private List<Entry> getGraphParamsDollar() {
-        JSONArray jsonArray = CommonUtils.getJSON("https://www.bitstamp.net/api/v2/transactions/btcusd/", null);
+        JSONArray jsonArray = CommonUtils.getJSON(getString(R.string.graph_url), null);
         List<Entry> entryList = new ArrayList<>();
         if (jsonArray != null) {
             try {
                 for (int i = jsonArray.length() - 1; i >= 0; i--) {
                     JSONObject referenceObject = jsonArray.getJSONObject(jsonArray.length() - 1);
-                    mReferenceTime = referenceObject.getLong("date");
+                    mReferenceTime = referenceObject.getLong(getString(R.string.date));
                     JSONObject object = jsonArray.getJSONObject(i);
-                    double price = object.getDouble("price") * object.getDouble("amount");
-                    long date = object.getLong("date") - mReferenceTime;
+                    double price = object.getDouble(getString(R.string.price)) * object.getDouble(getString(R.string.amount));
+                    long date = object.getLong(getString(R.string.date)) - mReferenceTime;
                     Entry btcEntry = new Entry(date, (float) price);
                     entryList.add(btcEntry);
                 }
@@ -117,7 +117,7 @@ public class MainActivity extends BasicActivity {
         @Override
         protected void onPostExecute(List<Entry> entries) {
             if (entries != null && !entries.isEmpty()) {
-                LineDataSet lineDataSet = new LineDataSet(entries, "Value vs Time(HH:mm:ss)");
+                LineDataSet lineDataSet = new LineDataSet(entries, getString(R.string.value_vs_time));
                 lineDataSet.setColor(Color.BLUE);
                 lineDataSet.setLineWidth(3f);
                 lineDataSet.setDrawFilled(true);

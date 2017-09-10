@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.LayoutRes;
@@ -21,14 +22,14 @@ import android.widget.LinearLayout;
 
 import com.example.shubhampandey.ilovezappos.R;
 
-public abstract class BasicActivity extends Activity
+public abstract class BaseActivity extends Activity
         implements NavigationView.OnNavigationItemSelectedListener {
     private FrameLayout mPageContentHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic);
+        setContentView(R.layout.activity_base);
         LinearLayout mPageContent = (LinearLayout) findViewById(R.id.page_content);
         mPageContentHolder = (FrameLayout) findViewById(R.id.page_content_holder);
         View childView = getLayoutInflater().inflate(getContentPageLayoutId(), mPageContent, false);
@@ -62,15 +63,20 @@ public abstract class BasicActivity extends Activity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.transact) {
-            Intent intent = new Intent(this, OrderBookActivity.class);
+            Intent intent = new Intent(this, GraphActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         } else if (id == R.id.order_book) {
-
+            Intent intent = new Intent(this, OrderBookActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         } else if (id == R.id.input_price) {
             showDialogForInput();
         } else if (id == R.id.git_repo) {
-
+            String url = getResources().getString(R.string.repo_url);
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -87,13 +93,13 @@ public abstract class BasicActivity extends Activity
         input.setLayoutParams(lp);
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setView(input);
-        alertDialog.setTitle("ENTER PRICE");
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle(R.string.enter_price);
+        alertDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("storedPrice", input.getText().toString());
+                editor.putString(getString(R.string.stored_price), input.getText().toString());
                 editor.apply();
             }
         });

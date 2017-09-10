@@ -10,6 +10,7 @@ import java.util.Locale;
 
 /**
  * Created by SHUBHAM PANDEY on 9/9/2017.
+ * Copied from mpAndroidChartIssues
  */
 
 public class HourAxisValueFormatter implements IAxisValueFormatter {
@@ -46,12 +47,11 @@ public class HourAxisValueFormatter implements IAxisValueFormatter {
         return getHour(originalTimestamp);
     }
 
-    private String getHour(long timestamp){
-        try{
-            mDate.setTime(timestamp*1000);
+    private String getHour(long timestamp) {
+        try {
+            mDate.setTime(timestamp * 1000);
             return mDataFormat.format(mDate);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             return "xx";
         }
     }

@@ -14,7 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 
 import com.example.shubhampandey.ilovezappos.R;
-import com.example.shubhampandey.ilovezappos.activities.MainActivity;
+import com.example.shubhampandey.ilovezappos.activities.GraphActivity;
 import com.example.shubhampandey.ilovezappos.utils.CommonUtils;
 
 import org.json.JSONException;
@@ -40,9 +40,9 @@ public class NotificationTriggerService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String storedString = preferences.getString("storedPrice", "");
-        storedPreference = Double.parseDouble(storedString);
-        if (CommonUtils.isNetworkAvailable(getApplicationContext())) {
+        String storedString = preferences.getString(getString(R.string.stored_price), "");
+        if (CommonUtils.isNetworkAvailable(getApplicationContext()) && !TextUtils.isEmpty(storedString)) {
+            storedPreference = Double.parseDouble(storedString);
             new LastBTCPriceTask().execute();
         }
         return START_STICKY;
@@ -68,11 +68,11 @@ public class NotificationTriggerService extends Service {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("ILoveZappos")
-                        .setContentText("Yo, the BTC price dropped to " + value)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.notification_msg_prefix) + value)
                         .setAutoCancel(true);
 
-        Intent notificationIntent = new Intent(this, MainActivity.class);
+        Intent notificationIntent = new Intent(this, GraphActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(contentIntent);
@@ -83,10 +83,10 @@ public class NotificationTriggerService extends Service {
 
     private String getLastPrice() {
         double fetchedPrice;
-        JSONObject object = CommonUtils.getJSON("https://www.bitstamp.net/api/v2/ticker_hour/btcusd/");
+        JSONObject object = CommonUtils.getJSON(getString(R.string.ticker_api_url));
         if (object != null) {
             try {
-                fetchedPrice = object.getDouble("last");
+                fetchedPrice = object.getDouble(getString(R.string.last));
                 if (fetchedPrice > 0 && fetchedPrice < storedPreference) {
                     return "" + fetchedPrice;
                 }
