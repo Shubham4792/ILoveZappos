@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">ILoveZappos</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_basic">BaseActivity</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="repo_url">https://github.com/Shubham4792/ILoveZappos</string>
@@ -11,12 +9,18 @@
     <string name="stored_price">storedPrice</string>
     <string name="no_internet">No internet connectivity</string>
     <string name="graph_url">https://www.bitstamp.net/api/v2/transactions/btcusd/</string>
+    <string name="order_book_url">https://www.bitstamp.net/api/v2/order_book/btcusd/</string>
     <string name="date">date</string>
     <string name="price">price</string>
     <string name="amount">amount</string>
     <string name="value_vs_time">Value vs Time(HH:mm:ss)</string>
     <string name="last">last</string>
     <string name="ticker_api_url">https://www.bitstamp.net/api/v2/ticker_hour/btcusd/</string>
-    <string name="notification_msg_prefix">Yo, the BTC price dropped to</string>
+    <string name="notification_msg_prefix">Yo, the BTC price dropped to </string>
     <string name="zappos_logo">ZapposLogo</string>
+    <string name="asks">Asks</string>
+    <string name="bids">Bids</string>
+    <string name="amount_dollar">Amount($)</string>
+    <string name="value">Value</string>
+    <string name="bid_ask">Bid/Ask</string>
 </resources>

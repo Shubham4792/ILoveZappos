@@ -6,16 +6,39 @@
     android:orientation="vertical"
     tools:context="com.example.shubhampandey.ilovezappos.activities.OrderBookActivity">
 
+    <TextView
+        android:id="@+id/bid_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/bids"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/header_text" />
+
+    <include layout="@layout/list_header_row" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bid_table_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/table_margins"
+        android:layout_height="@dimen/recycler_view_height"
+        android:layout_marginBottom="@dimen/list_margin"
         android:scrollbars="vertical" />
+
+    <TextView
+        android:id="@+id/ask_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/asks"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/header_text" />
+
+    <include layout="@layout/list_header_row" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/ask_table_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/recycler_view_height"
         android:scrollbars="vertical" />
+
 </LinearLayout>

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.shubhampandey.ilovezappos.R;
+import com.example.shubhampandey.ilovezappos.utils.Transaction;
 
 import java.util.List;
 
@@ -15,23 +16,23 @@ import java.util.List;
  */
 
 public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
-    private List<String> values;
+    private List<Transaction> transactions;
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView bidAsk;
-        private TextView amount;
-        private TextView value;
+        private TextView bidAskView;
+        private TextView amountView;
+        private TextView valueView;
 
         private ViewHolder(View v) {
             super(v);
-            bidAsk = (TextView) v.findViewById(R.id.bidask);
-            amount = (TextView) v.findViewById(R.id.amount);
-            value = (TextView) v.findViewById(R.id.value);
+            bidAskView = (TextView) v.findViewById(R.id.bidask);
+            amountView = (TextView) v.findViewById(R.id.amount);
+            valueView = (TextView) v.findViewById(R.id.value);
         }
     }
 
-    public TableAdapter(List<String> myDataSet) {
-        values = myDataSet;
+    public TableAdapter(List<Transaction> transactionList) {
+        transactions = transactionList;
     }
 
     @Override
@@ -44,15 +45,27 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        final String name = values.get(position);
-        holder.bidAsk.setText(name);
-        holder.amount.setText("amount: " + name);
-        holder.value.setText("value: " + name);
+        Transaction transaction = transactions.get(position);
+        String bidOrAsk = "";
+        String amount = "";
+        String value = "";
+        if (transaction.isBid()) {
+            bidOrAsk = "" + transaction.getBid();
+            amount = "" + transaction.getAmount();
+            value = "" + transaction.getValue();
+        } else {
+            bidOrAsk = "" + transaction.getAsk();
+            amount = "" + transaction.getAmount();
+            value = "" + transaction.getValue();
+        }
+        holder.bidAskView.setText(bidOrAsk);
+        holder.amountView.setText(amount);
+        holder.valueView.setText(value);
     }
 
     @Override
     public int getItemCount() {
-        return values.size();
+        return transactions.size();
     }
 
 }
